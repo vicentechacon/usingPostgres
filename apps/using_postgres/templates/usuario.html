@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas Coding Dojo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/funciones.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    {% for message in messages %}
+    <p class="{{ message.tags }}"> {{ message }}</p>
+    {% endfor %}
+    <div class="container">
+        <form action="" id=registro method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Nombre</td>
+                    <td><input type="text" name='nombre' id='nombre' value={{usuario.nombre}}></td>
+                </tr>
+                <tr>
+                    <td>Apellido</td>
+                    <td><input type="text" name='apellido' id='apellido' value={{usuario.apellido}}></td>
+                </tr>
+                <tr>
+                    <td>Email <span id='errorEmail'></span> </td>
+                    <td><input type="text" name='email' id='email' value={{usuario.email}}></td>
+                </tr>
+                <tr>
+                    <td>Fecha de Nacimiento</td>
+                    <td><input type="date" name='fecha_nacimiento' id='fecha_nacimiento'
+                            value={{usuario.fecha_nacimiento}}></td>
+                </tr>
+                <tr>
+                    <td>Codigo</td>
+                    <td><input type="number" name='codigo' id='codigo' value={{usuario.codigo}}></td>
+                </tr>
+                {% if not usuario %}
+                <tr>
+                    <td>Contraseña</td>
+                    <td><input type="password" name='password' id='password'></td>
+                </tr>
+                <tr>
+                    <td>Confirmar</td>
+                    <td><input type="password" name='confirmarPassword' id='confirmarPassword'></td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td><button>Registrar</button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><a href="/">Menu principal</a></td>
+                </tr>
+            </table>
+
+        </form>
+
+
+
+    </div>
+</body>
+
+</html>

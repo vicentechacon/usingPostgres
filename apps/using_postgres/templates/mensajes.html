@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Bienvienido {{usuario.nombre}} </h1>
+
+    <h3>Todos los mensajes</h3>
+    {% for mensaje in mensajes %}
+    <p>{{mensaje}} <a href="/like/{{mensaje.id}}">Me gusta</a></p>
+    {% endfor %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">Mensaje</label>
+        <textarea name="mensaje" id="" cols="10" rows="5"></textarea>
+        <button>Enviar</button>
+    </form>
+
+    <a href="/">Menu Principal</a>
+    <a href="/cerrarSession">Cerrar Sesión</a>
+
+    <h3>Mensajes del usuario</h3>
+    {% for mensaje in usuario.mensajes.all %}
+    <p>{{mensaje}}</p>
+    {% endfor %}
+
+
+    <h3>Mensajes que me gustan</h3>
+    {% for mensaje in usuario.likes.all %}
+    <p>{{mensaje}}</p>
+    {% endfor %}
+
+    <h3>Mensajes que le gustan a otros usuarios</h3>
+    {% for mensaje in usuario.mensajes.all %}
+    {% for user in mensaje.le_gusta_a.all %}
+    <p><b>{{user.nombre}} ---> {{mensaje}}</b></p>
+
+    {% endfor %}
+    {% endfor %}
+
+
+
+</body>
+
+</html>
